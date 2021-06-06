@@ -5,12 +5,13 @@ try:
 except ImportError:
     raise ImportError("QT5 not founded")
 from .UIMenu import UIMenu
+from .UIGame import UIGame
 
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
-        self.menu()
+        self.game()
 
     def menu(self):
         """main menu"""
@@ -22,7 +23,11 @@ class MainWindow(QMainWindow):
 
     def game(self):
         """initialize game screen"""
-        pass
+        self.setMinimumWidth(450)
+        self.setMinimumHeight(350)
+        self.UIGame = UIGame(self)
+        self.setCentralWidget(self.UIGame)
+        self.show()
 
     def paintEvent(self, event):
         painter = QPainter(self)

@@ -6,7 +6,13 @@ class Inc:
         self.inc_per_upgrade = inc_per_upgrade
         self.upgrade_cost = upgrade_cost
         self.image = image
+        self.upgrades_no = 0
+        """ GUI"""
         self.pr_bar = None
+        self.image_lbl = None
+        self.upgrade_btn = None
+        self.upgrades_no_lbl = None
+        self.layout = None
         self.active = False
 
     def upgrade(self):

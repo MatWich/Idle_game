@@ -4,6 +4,8 @@ from classes import MainWindow
 from PyQt5.QtWidgets import QApplication
 from classes import MyThread
 
+from settings import *
+
 
 def exit_handler():
     thread1.quit()
@@ -11,9 +13,10 @@ def exit_handler():
 
 
 if __name__ == '__main__':
+    print(LEMON_IMG)
     app = QApplication(sys.argv)
     app.aboutToQuit.connect(exit_handler)
     window = MainWindow()
-    thread1 = MyThread(window)
-    thread1.start()
+    # thread1 = MyThread(window)
+    # thread1.start()
     sys.exit(app.exec_())
