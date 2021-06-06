@@ -55,21 +55,37 @@ class UIGame(QWidget):
         """ You have to provide an Inc object"""
         inc.pr_bar = QProgressBar()
         inc.image_lbl = QLabel()
-        inc.image_lbl.setPixmap(QPixmap(inc.image).scaled(32, 32))
+        inc.image_lbl.setPixmap(QPixmap(inc.image).scaled(64, 64))
         inc.upgrade_btn = QPushButton(f"Upgrade for: {inc.upgrade_cost}")
         inc.upgrades_no_lbl = QLabel()
         inc.upgrades_no_lbl.setNum(inc.upgrades_no)
-        inc.layout = QGridLayout()
-        vbox1 = QVBoxLayout()
-        vbox2 = QVBoxLayout()
-        hbox = QHBoxLayout()
 
+        inc.layout = QHBoxLayout()
+        vbox = QVBoxLayout()
+        hbox = QHBoxLayout()
         hbox.addWidget(inc.upgrade_btn)
         hbox.addWidget(inc.upgrades_no_lbl)
-        vbox1.addWidget(inc.image_lbl)
 
-        vbox2.addWidget(inc.pr_bar)
-        vbox2.addLayout(hbox)
+        inc.layout.addWidget(inc.image_lbl)
+        vbox.addWidget(inc.pr_bar)
+        vbox.addLayout(hbox)
 
-        inc.layout.addLayout(vbox1, 0, 0, 2, 2)
-        inc.layout.addLayout(vbox2, 0, 3, 1, 1)
+        inc.layout.addLayout(vbox)
+
+
+
+        # inc.layout = QGridLayout()
+        # vbox1 = QVBoxLayout()
+        # vbox2 = QVBoxLayout()
+        # hbox = QHBoxLayout()
+        #
+        # hbox.addWidget(inc.upgrade_btn)
+        # hbox.addWidget(inc.upgrades_no_lbl)
+        # vbox1.addWidget(inc.image_lbl)
+        #
+        # vbox2.addWidget(inc.pr_bar)
+        # vbox2.addLayout(hbox)
+        #
+        # inc.layout.addLayout(vbox1, 0, 0, 2, 2)
+        # inc.layout.addLayout(vbox2, 0, 2, 1, 1)
+
