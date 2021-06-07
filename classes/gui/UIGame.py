@@ -5,7 +5,7 @@ try:
     from PyQt5.QtWidgets import *
     from PyQt5.QtGui import *
     from PyQt5 import QtCore, QtGui
-    from PyQt5.QtCore import QThread, pyqtSignal
+    from PyQt5.QtCore import QThread, pyqtSignal, QTimer
 
 except ImportError:
     raise ImportError("QT5 not founded")
@@ -29,9 +29,9 @@ class PrThread(QThread):
         while cnt < 100:
             if cnt == 99:
                 cnt = 0
-                self.data.profit += self.inc.profit
+                self.data.profit += self.inc.profit + self.inc.profit * self.inc.upgrades_no
             cnt += 1
-            time.sleep(0.01)
+            time.sleep(self.inc.time)
             self.change_value.emit(cnt)
 
     def stop(self):
@@ -45,11 +45,16 @@ class UIGame(QWidget):
         super(UIGame, self).__init__(parent)
         self.incs = []
         self.layout = QGridLayout()
+        self.topLayout = QHBoxLayout()
         self.leftVBox = QVBoxLayout()
         self.rightVBox = QVBoxLayout()
         self.data = Data.get_instance()
         self.threads = {}
         self.initUI()
+        self.timer = QTimer()
+        self.timer.setInterval(100)
+        self.timer.timeout.connect(lambda: self.update_labels())
+        self.timer.start()
 
     def initUI(self):
         self.create_company(self.data.lemonShop_inc)
@@ -63,6 +68,8 @@ class UIGame(QWidget):
         self.create_company(self.data.white_house_inc)
         self.create_company(self.data.oil_inc)
 
+        """ BUTTONS """
+
         self.data.lemonShop_inc.upgrade_btn.clicked.connect(lambda: self.startProgressBar(self.data.lemonShop_inc))
         self.data.paper_inc.upgrade_btn.clicked.connect(lambda: self.startProgressBar(self.data.paper_inc))
         self.data.car_wash_inc.upgrade_btn.clicked.connect(lambda: self.startProgressBar(self.data.car_wash_inc))
@@ -74,6 +81,16 @@ class UIGame(QWidget):
         self.data.camera_inc.upgrade_btn.clicked.connect(lambda: self.startProgressBar(self.data.camera_inc))
         self.data.white_house_inc.upgrade_btn.clicked.connect(lambda: self.startProgressBar(self.data.white_house_inc))
         self.data.oil_inc.upgrade_btn.clicked.connect(lambda: self.startProgressBar(self.data.oil_inc))
+
+        """ TOP Layout """
+        self.money_label = QLabel()
+        self.money_label.setText(f"Money: {self.data.profit}")
+        self.btn = QPushButton()
+        self.btn.clicked.connect(self.increase_money)
+
+        self.topLayout.addWidget(self.money_label)
+        self.topLayout.addWidget(self.btn)
+
 
 
         """ Left layout """
@@ -92,8 +109,9 @@ class UIGame(QWidget):
         self.rightVBox.addLayout(self.data.white_house_inc.layout)
         self.rightVBox.addLayout(self.data.oil_inc.layout)
 
-        self.layout.addLayout(self.leftVBox, 0, 0)
-        self.layout.addLayout(self.rightVBox, 0, 1)
+        self.layout.addLayout(self.topLayout, 0, 0, 2, 2)
+        self.layout.addLayout(self.leftVBox, 2, 0, 1, 1)
+        self.layout.addLayout(self.rightVBox, 2, 1, 1, 1)
         self.setLayout(self.layout)
 
     def create_company(self, inc):
@@ -133,13 +151,19 @@ class UIGame(QWidget):
         # inc.layout.addLayout(vbox2, 0, 2, 1, 1)
 
     def startProgressBar(self, inc):
-        print(f'inc index: {inc.index}')
         self.threads[inc.index] = PrThread(inc=inc, index=inc.index)
         self.threads[inc.index].change_value.connect(self.setProgressValue)
         self.threads[inc.index].start()
 
     def setProgressValue(self, val):
         index = self.sender().index
-        print(index)
 
         self.data.incs[index - 1].pr_bar.setValue(val)
+
+    # update view
+    def update_labels(self):
+        self.money_label.setText(f'Money: {self.data.profit}')
+
+    def increase_money(self):
+        self.data.profit += 1
+        self.update_labels()
