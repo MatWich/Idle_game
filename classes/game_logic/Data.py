@@ -19,7 +19,7 @@ class Data:
 
         self.lemonShop_inc = Inc("Lemon Shop", 0.05, 1, 1, 1, 1,LEMON_IMG)
         self.paper_inc = Inc("News Paper Shop", .1, 2, 2, 2, 2,PAPER_IMG)
-        self.car_wash_inc = Inc("Car Wash", .15, 3, 3, 2, 3,CAR_IMG)
+        self.car_wash_inc = Inc("Car Wash", .15, 3, 3, 3, 3,CAR_IMG)
         self.pizza_inc = Inc("Pizza", .2, 4, 4, 4, 4, PIZZA_IMG)
         self.donut_inc = Inc("Donut Shop", .25, 5, 5, 5, 5, DONUT_IMG)
         self.sea_food_inc = Inc("Sea Food Rest", .30, 6, 6, 6, 6, SHRIMP_IMG)
