@@ -29,7 +29,7 @@ class PrThread(QThread):
         while cnt < 100:
             if cnt == 99:
                 cnt = 0
-                self.data.profit += self.inc.profit + self.inc.profit * self.inc.upgrades_no
+                self.data.money += self.inc.profit + self.inc.profit * self.inc.upgrades_no
             cnt += 1
             time.sleep(self.inc.time)
             self.change_value.emit(cnt)
@@ -84,7 +84,7 @@ class UIGame(QWidget):
 
         """ TOP Layout """
         self.money_label = QLabel()
-        self.money_label.setText(f"Money: {self.data.profit}")
+        self.money_label.setText(f"Money: {self.data.money}")
         self.btn = QPushButton()
         self.btn.clicked.connect(self.increase_money)
 
@@ -151,12 +151,18 @@ class UIGame(QWidget):
         # inc.layout.addLayout(vbox2, 0, 2, 1, 1)
 
     def startProgressBar(self, inc):
-        if inc.index not in self.threads:
-            self.threads[inc.index] = PrThread(inc=inc, index=inc.index)
-            self.threads[inc.index].change_value.connect(self.setProgressValue)
-            self.threads[inc.index].start()
+        if self.data.money >= inc.upgrade_cost:
+
+            if inc.index not in self.threads:
+                self.threads[inc.index] = PrThread(inc=inc, index=inc.index)
+                self.threads[inc.index].change_value.connect(self.setProgressValue)
+                self.threads[inc.index].start()
+                self.data.money -= inc.upgrade_cost
+            else:
+                inc.upgrades_no += 1
+                self.data.money -= inc.upgrade_cost
         else:
-            inc.upgrades_no += 1
+            return
 
 
 
@@ -168,10 +174,10 @@ class UIGame(QWidget):
 
     # update view
     def update_labels(self):
-        self.money_label.setText(f'Money: {self.data.profit}')
+        self.money_label.setText(f'Money: {self.data.money}')
         for inc in self.data.incs:
             inc.upgrades_no_lbl.setNum(inc.upgrades_no)
 
     def increase_money(self):
-        self.data.profit += 1
+        self.data.money += 1
         self.update_labels()

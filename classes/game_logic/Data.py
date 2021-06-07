@@ -32,4 +32,4 @@ class Data:
                      self.pizza_inc, self.donut_inc, self.sea_food_inc, self.hokey_inc,
                      self.camera_inc, self.white_house_inc, self.oil_inc]
 
-        self.profit = 0
+        self.money = 0
