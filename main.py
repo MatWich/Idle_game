@@ -3,13 +3,14 @@ from classes import Data
 from classes import MainWindow
 from PyQt5.QtWidgets import QApplication
 from classes import MyThread
+import threading
 
 from settings import *
 
-
 def exit_handler():
-    thread1.quit()
-    thread1.join()
+    pass
+    # thread1.quit()
+    # thread1.join()
 
 
 if __name__ == '__main__':

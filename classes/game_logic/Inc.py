@@ -1,5 +1,8 @@
+import threading
+
+
 class Inc:
-    def __init__(self, name, time, profit, inc_per_upgrade, upgrade_cost, image):
+    def __init__(self, name, time, profit, inc_per_upgrade, upgrade_cost, index ,image):
         self.name = name
         self.time = time
         self.profit = profit
@@ -7,6 +10,8 @@ class Inc:
         self.upgrade_cost = upgrade_cost
         self.image = image
         self.upgrades_no = 0
+        self.index = index
+        #self.thread.start()
         """ GUI"""
         self.pr_bar = None
         self.image_lbl = None
@@ -17,4 +22,3 @@ class Inc:
 
     def upgrade(self):
         self.profit += self.inc_per_upgrade
-
