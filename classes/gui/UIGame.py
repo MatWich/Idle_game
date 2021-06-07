@@ -85,7 +85,7 @@ class UIGame(QWidget):
         """ TOP Layout """
         self.money_label = QLabel()
         self.money_label.setText(f"Money: {self.data.money}")
-        self.btn = QPushButton()
+        self.btn = QPushButton(f"Make 1 $")
         self.btn.clicked.connect(self.increase_money)
 
         self.topLayout.addWidget(self.money_label)
@@ -119,7 +119,7 @@ class UIGame(QWidget):
         inc.pr_bar = QProgressBar()
         inc.image_lbl = QLabel()
         inc.image_lbl.setPixmap(QPixmap(inc.image).scaled(64, 64))
-        inc.upgrade_btn = QPushButton(f"Upgrade for: {inc.upgrade_cost}")
+        inc.upgrade_btn = QPushButton(f"Upgrade for: {inc.upgrade_cost} $")
         inc.upgrades_no_lbl = QLabel()
         inc.upgrades_no_lbl.setNum(inc.upgrades_no)
 
@@ -174,7 +174,7 @@ class UIGame(QWidget):
 
     # update view
     def update_labels(self):
-        self.money_label.setText(f'Money: {self.data.money}')
+        self.money_label.setText(f'Money: {self.data.money} $')
         for inc in self.data.incs:
             inc.upgrades_no_lbl.setNum(inc.upgrades_no)
 
