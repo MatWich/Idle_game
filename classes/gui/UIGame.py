@@ -151,9 +151,15 @@ class UIGame(QWidget):
         # inc.layout.addLayout(vbox2, 0, 2, 1, 1)
 
     def startProgressBar(self, inc):
-        self.threads[inc.index] = PrThread(inc=inc, index=inc.index)
-        self.threads[inc.index].change_value.connect(self.setProgressValue)
-        self.threads[inc.index].start()
+        if inc.index not in self.threads:
+            self.threads[inc.index] = PrThread(inc=inc, index=inc.index)
+            self.threads[inc.index].change_value.connect(self.setProgressValue)
+            self.threads[inc.index].start()
+        else:
+            inc.upgrades_no += 1
+
+
+
 
     def setProgressValue(self, val):
         index = self.sender().index
@@ -163,6 +169,8 @@ class UIGame(QWidget):
     # update view
     def update_labels(self):
         self.money_label.setText(f'Money: {self.data.profit}')
+        for inc in self.data.incs:
+            inc.upgrades_no_lbl.setNum(inc.upgrades_no)
 
     def increase_money(self):
         self.data.profit += 1
