@@ -1,5 +1,6 @@
 import threading
 import time
+from settings import *
 
 try:
     from PyQt5.QtWidgets import *
@@ -19,16 +20,16 @@ class UIMenu(QWidget):
         self.initUI()
 
     def initUI(self):
+        self.logo = QLabel()
+        self.logo.setPixmap(QPixmap(LOGO_IMG))
         self.start_btn = self.create_button("Start")
         self.credits_btn = self.create_button("Credits")
         self.exit_btn = self.create_button("Exit")
 
-        self.pr_bar = QProgressBar()
-
+        self.layout.addWidget(self.logo)
         self.layout.addWidget(self.start_btn)
         self.layout.addWidget(self.credits_btn)
         self.layout.addWidget(self.exit_btn)
-        self.layout.addWidget(self.pr_bar)
         self.setLayout(self.layout)
 
     def create_button(self, text):
@@ -44,18 +45,3 @@ class UIMenu(QWidget):
                           "background: #5F634F;" +
                           "color: #9BC4CB;}")
         return btn
-
-
-class MyThread(threading.Thread):
-    def __init__(self, widget):
-        threading.Thread.__init__(self)
-        self.counter = 0
-        self.window = widget
-
-    def run(self):
-        print(f"Starting {self.name}")
-        while self.counter < 100:
-            time.sleep(1)
-            self.counter += 1
-            print(f'hello {self.counter}')
-            self.window.UIMenu.pr_bar.setValue(self.counter)

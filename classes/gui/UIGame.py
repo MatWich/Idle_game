@@ -164,9 +164,6 @@ class UIGame(QWidget):
         else:
             return
 
-
-
-
     def setProgressValue(self, val):
         index = self.sender().index
 

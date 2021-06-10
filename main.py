@@ -5,9 +5,6 @@ from PyQt5 import QtCore
 from classes import Data
 from classes import MainWindow
 from PyQt5.QtWidgets import QApplication
-from classes import MyThread
-import threading
-
 from settings import *
 
 
@@ -21,7 +18,4 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     app.aboutToQuit.connect(exit_handler)
     window = MainWindow()
-
-
-
     sys.exit(app.exec_())
