@@ -14,3 +14,4 @@ HOUSE_IMG = os.path.join(IMGS, "house.png")
 OIL_IMG = os.path.join(IMGS, "petrol.png")
 
 LOGO_IMG = os.path.join(IMGS, "logo1.png")
+ICON_IMG = os.path.join(IMGS, "Money_Bag_icon.ico")

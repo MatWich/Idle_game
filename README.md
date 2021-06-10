@@ -1,15 +1,30 @@
 ## IDLE GAME with PyQt5
 
-# Game logic stuff
-- [ ] class for incs
-- [ ] timers for incs
+## Quick sneak peek
+![img.png](img.png)<br>
 
-# GUI stuff
-- [ ] click events
-- [ ] game layout
+![img_2.png](img_2.png)<br>
+
+## Quick start
+```commandline
+git clone https://github.com/MatWich/Idle_game.git
+cd Idle_game
+pip install -r requirements.txt
+python ./main.py
+```
+
+## TO DO
+
+- [x] Game logic stuff
+    - [x] class for incs
+    - [x] timers for incs
+
+- [x] GUI stuff
+    - [x] click events
+    - [x] game layout
 
 
-# COLORS
+# COLORS PALETTE
 ```
 #5F634F
 #9BC4CB

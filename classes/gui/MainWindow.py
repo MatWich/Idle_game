@@ -6,11 +6,14 @@ except ImportError:
     raise ImportError("QT5 not founded")
 from .UIMenu import UIMenu
 from .UIGame import UIGame
+from settings import *
 
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
+        self.setWindowTitle("Adventure Capitalist - Scaffed Edition")
+        self.setWindowIcon(QIcon(ICON_IMG))
         self.menu()
         # self.game()
 
