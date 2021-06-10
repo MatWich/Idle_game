@@ -6,6 +6,7 @@ except ImportError:
     raise ImportError("QT5 not founded")
 from .UIMenu import UIMenu
 from .UIGame import UIGame
+from .UICredits import UICredits
 from settings import *
 
 
@@ -23,6 +24,8 @@ class MainWindow(QMainWindow):
         self.setMinimumHeight(350)
         self.UIMenu = UIMenu(self)
         self.UIMenu.start_btn.clicked.connect(self.game)
+        self.UIMenu.credits_btn.clicked.connect(self.credits)
+        self.UIMenu.exit_btn.clicked.connect(self.exit)
         self.setCentralWidget(self.UIMenu)
         self.show()
 
@@ -33,6 +36,18 @@ class MainWindow(QMainWindow):
         self.UIGame = UIGame(self)
         self.setCentralWidget(self.UIGame)
         self.show()
+
+    def credits(self):
+        """initialize credits"""
+        self.setMinimumWidth(450)
+        self.setMinimumHeight(350)
+        self.UICredits = UICredits(self)
+        self.UICredits.back_btn.clicked.connect(self.menu)
+        self.setCentralWidget(self.UICredits)
+        self.show()
+
+    def exit(self):
+        QApplication.quit()
 
     def paintEvent(self, event):
         painter = QPainter(self)

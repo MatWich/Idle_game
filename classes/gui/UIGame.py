@@ -89,6 +89,16 @@ class UIGame(QWidget):
         self.money_label.setFont(self.adv_cap_font_big)
         self.btn = QPushButton(f"Make 1 $")
         self.btn.setFont(self.adv_cap_font_big)
+        self.btn.setStyleSheet("""*{margin: 6px;
+                       padding: 5px;
+                       border: 1px solid black;
+                       border-radius: 4px;
+                       background: #9BC4CB;
+                       color: #5F634F;
+                       }""" +
+                                      "*:hover {" +
+                                      "background: #5F634F;" +
+                                      "color: #9BC4CB;}")
         self.btn.clicked.connect(self.increase_money)
 
         self.topLayout.addWidget(self.money_label)
@@ -125,7 +135,27 @@ class UIGame(QWidget):
         inc.image_lbl.setPixmap(QPixmap(inc.image).scaled(64, 64))
         inc.upgrade_btn = QPushButton(f"Upgrade for: {inc.upgrade_cost} $")
         inc.upgrade_btn.setFont(self.adv_cap_font_small)
+        inc.upgrade_btn.setStyleSheet("""*{margin: 6px;
+               padding: 5px;
+               border: 1px solid black;
+               border-radius: 4px;
+               background: #9BC4CB;
+               color: #5F634F;
+               }""" +
+                          "*:hover {" +
+                          "background: #5F634F;" +
+                          "color: #9BC4CB;}")
         inc.upgrade_buy_counter_btn = QPushButton(f"x{inc.upg_x[inc.upg_buy_counter]}")
+        inc.upgrade_buy_counter_btn.setStyleSheet("""*{margin: 6px;
+               padding: 5px;
+               border: 1px solid black;
+               border-radius: 4px;
+               background: #9BC4CB;
+               color: #5F634F;
+               }""" +
+                          "*:hover {" +
+                          "background: #5F634F;" +
+                          "color: #9BC4CB;}")
         inc.upgrade_buy_counter_btn.clicked.connect(inc.upgrade_buy_counter_handle)
         inc.upgrades_no_lbl = QLabel()
         inc.upgrades_no_lbl.setNum(inc.upgrades_no)
