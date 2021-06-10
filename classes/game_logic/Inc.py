@@ -11,14 +11,23 @@ class Inc:
         self.image = image
         self.upgrades_no = 0
         self.index = index
+        self.upg_buy_counter = 0
+        self.upg_x = [1, 10, 50, 100]
         #self.thread.start()
         """ GUI"""
         self.pr_bar = None
         self.image_lbl = None
         self.upgrade_btn = None
         self.upgrades_no_lbl = None
+        self.upgrade_buy_counter_btn = None
         self.layout = None
         self.active = False
 
     def upgrade(self):
         self.profit += self.inc_per_upgrade
+
+    def upgrade_buy_counter_handle(self):
+        if self.upg_buy_counter == 3:
+            self.upg_buy_counter = 0
+        else:
+            self.upg_buy_counter += 1

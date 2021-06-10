@@ -125,7 +125,8 @@ class UIGame(QWidget):
         inc.image_lbl.setPixmap(QPixmap(inc.image).scaled(64, 64))
         inc.upgrade_btn = QPushButton(f"Upgrade for: {inc.upgrade_cost} $")
         inc.upgrade_btn.setFont(self.adv_cap_font_small)
-
+        inc.upgrade_buy_counter_btn = QPushButton(f"x{inc.upg_x[inc.upg_buy_counter]}")
+        inc.upgrade_buy_counter_btn.clicked.connect(inc.upgrade_buy_counter_handle)
         inc.upgrades_no_lbl = QLabel()
         inc.upgrades_no_lbl.setNum(inc.upgrades_no)
         inc.upgrades_no_lbl.setFont(self.adv_cap_font_small)
@@ -135,6 +136,7 @@ class UIGame(QWidget):
         hbox = QHBoxLayout()
         hbox.addWidget(inc.upgrade_btn)
         hbox.addWidget(inc.upgrades_no_lbl)
+        hbox.addWidget(inc.upgrade_buy_counter_btn)
 
         inc.layout.addWidget(inc.image_lbl)
         vbox.addWidget(inc.pr_bar)
@@ -158,16 +160,17 @@ class UIGame(QWidget):
         # inc.layout.addLayout(vbox2, 0, 2, 1, 1)
 
     def startProgressBar(self, inc):
-        if self.data.money >= inc.upgrade_cost:
+        if self.data.money >= inc.upgrade_cost * inc.upg_x[inc.upg_buy_counter]:
 
             if inc.index not in self.threads:
                 self.threads[inc.index] = PrThread(inc=inc, index=inc.index)
                 self.threads[inc.index].change_value.connect(self.setProgressValue)
                 self.threads[inc.index].start()
-                self.data.money -= inc.upgrade_cost
+                self.data.money -= inc.upgrade_cost * inc.upg_x[inc.upg_buy_counter]
+                inc.upgrades_no += inc.upg_x[inc.upg_buy_counter]
             else:
-                inc.upgrades_no += 1
-                self.data.money -= inc.upgrade_cost
+                inc.upgrades_no += inc.upg_x[inc.upg_buy_counter]
+                self.data.money -= inc.upgrade_cost * inc.upg_x[inc.upg_buy_counter]
         else:
             return
 
@@ -181,6 +184,7 @@ class UIGame(QWidget):
         self.money_label.setText(f'Money: {self.data.money} $')
         for inc in self.data.incs:
             inc.upgrades_no_lbl.setNum(inc.upgrades_no)
+            inc.upgrade_buy_counter_btn.setText(f"x{inc.upg_x[inc.upg_buy_counter]}")
 
     def increase_money(self):
         self.data.money += 1
