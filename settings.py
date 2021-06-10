@@ -13,4 +13,4 @@ CINEMA_IMGS = os.path.join(IMGS, "cinema.png")
 HOUSE_IMG = os.path.join(IMGS, "house.png")
 OIL_IMG = os.path.join(IMGS, "petrol.png")
 
-LOGO_IMG = os.path.join(IMGS, "logo.png")
+LOGO_IMG = os.path.join(IMGS, "logo1.png")
