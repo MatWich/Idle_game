@@ -19,6 +19,7 @@ class MainWindow(QMainWindow):
         self.setMinimumWidth(450)
         self.setMinimumHeight(350)
         self.UIMenu = UIMenu(self)
+        self.UIMenu.start_btn.clicked.connect(self.game)
         self.setCentralWidget(self.UIMenu)
         self.show()
 

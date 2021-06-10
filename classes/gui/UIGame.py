@@ -83,9 +83,12 @@ class UIGame(QWidget):
         self.data.oil_inc.upgrade_btn.clicked.connect(lambda: self.startProgressBar(self.data.oil_inc))
 
         """ TOP Layout """
+        self.adv_cap_font_big = QFont("Trajan Pro", 20, 700)
         self.money_label = QLabel()
         self.money_label.setText(f"Money: {self.data.money}")
+        self.money_label.setFont(self.adv_cap_font_big)
         self.btn = QPushButton(f"Make 1 $")
+        self.btn.setFont(self.adv_cap_font_big)
         self.btn.clicked.connect(self.increase_money)
 
         self.topLayout.addWidget(self.money_label)
@@ -116,12 +119,16 @@ class UIGame(QWidget):
 
     def create_company(self, inc):
         """ You have to provide an Inc object"""
+        self.adv_cap_font_small = QFont("Trajan Pro", 10, 700)
         inc.pr_bar = QProgressBar()
         inc.image_lbl = QLabel()
         inc.image_lbl.setPixmap(QPixmap(inc.image).scaled(64, 64))
         inc.upgrade_btn = QPushButton(f"Upgrade for: {inc.upgrade_cost} $")
+        inc.upgrade_btn.setFont(self.adv_cap_font_small)
+
         inc.upgrades_no_lbl = QLabel()
         inc.upgrades_no_lbl.setNum(inc.upgrades_no)
+        inc.upgrades_no_lbl.setFont(self.adv_cap_font_small)
 
         inc.layout = QHBoxLayout()
         vbox = QVBoxLayout()
