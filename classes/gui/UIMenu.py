@@ -20,11 +20,18 @@ class UIMenu(QWidget):
         self.initUI()
 
     def initUI(self):
+        btn_font = QFont("Trajan Pro", 50, 700)
         self.logo = QLabel()
         self.logo.setPixmap(QPixmap(LOGO_IMG))
         self.start_btn = self.create_button("Start")
+        self.start_btn.setMinimumHeight(75)
+        self.start_btn.setFont(btn_font)
         self.credits_btn = self.create_button("Credits")
+        self.credits_btn.setMinimumHeight(75)
+        self.credits_btn.setFont(btn_font)
         self.exit_btn = self.create_button("Exit")
+        self.exit_btn.setMinimumHeight(75)
+        self.exit_btn.setFont(btn_font)
 
         self.layout.addWidget(self.logo)
         self.layout.addWidget(self.start_btn)

@@ -11,7 +11,7 @@ except ImportError:
     raise ImportError("QT5 not founded")
 
 from ..game_logic import *
-
+from settings import *
 
 class PrThread(QThread):
     change_value = pyqtSignal(int)
@@ -131,6 +131,18 @@ class UIGame(QWidget):
         """ You have to provide an Inc object"""
         self.adv_cap_font_small = QFont("Trajan Pro", 10, 700)
         inc.pr_bar = QProgressBar()
+        inc.pr_bar.setStyleSheet("QProgressBar"
+                          "{"+
+                                 "margin: 5px;"+
+                                 "padding: 4px;"+
+                          "border: 1px solid grey;"+
+                          "border-radius: 15px;"+
+                          " color: transparent; "+
+                          "}"+
+                          "QProgressBar::chunk "+
+                          "{background-color: #9BC4CB;"+
+                          "border-radius :15px;"+
+                          "}")
         inc.image_lbl = QLabel()
         inc.image_lbl.setPixmap(QPixmap(inc.image).scaled(64, 64))
         inc.upgrade_btn = QPushButton(f"Upgrade for: {inc.upgrade_cost} $")

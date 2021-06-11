@@ -15,13 +15,13 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__(parent)
         self.setWindowTitle("Adventure Capitalist - Scaffed Edition")
         self.setWindowIcon(QIcon(ICON_IMG))
+        self.setMinimumWidth(500)
+        self.setMinimumHeight(550)
         self.menu()
         # self.game()
 
     def menu(self):
         """main menu"""
-        self.setMinimumWidth(450)
-        self.setMinimumHeight(350)
         self.UIMenu = UIMenu(self)
         self.UIMenu.start_btn.clicked.connect(self.game)
         self.UIMenu.credits_btn.clicked.connect(self.credits)
@@ -31,8 +31,6 @@ class MainWindow(QMainWindow):
 
     def game(self):
         """initialize game screen"""
-        self.setMinimumWidth(450)
-        self.setMinimumHeight(350)
         self.UIGame = UIGame(self)
         self.setCentralWidget(self.UIGame)
         self.show()
