@@ -1,9 +1,12 @@
 ## IDLE GAME with PyQt5
 
 ## Quick sneak peek
-![img.png](img.png)<br>
+![img.png](imgs/img.png)<br>
 
-![img_2.png](img_2.png)<br>
+![img_2.png](imgs/img_2.png)<br>
+
+NEW PROGRESS BARS !!! <br>
+![img_1.png](imgs/img_1.png)<br>
 
 ## Quick start
 ```commandline
